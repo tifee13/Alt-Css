@@ -1,4 +1,10 @@
 {
-    "rewrites": [{ "source": "/", "destination": "/index.html" }]
+    "rewrites": [
+      { "source": "/ass1", "destination": "/ass1/index.html" },
+      { "source": "/ass2", "destination": "/ass2/index.html" },
+      { "source": "/ass3", "destination": "/ass3/index.html" },
+      { "source": "/ass4", "destination": "/ass4/index.html" },
+      { "source": "/ass5", "destination": "/ass5/index.html" }
+    ]
   }
   
