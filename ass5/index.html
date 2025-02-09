@@ -4,272 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WP Pusher Checkout</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f7f7f7;
-        }
-
-        .container {
-            width: 960px;
-            margin: 20px auto;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        header {
-            background-color: #f7f7f7;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        header .logo img {
-            height: 25px;
-        }
-
-        header nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-        }
-
-        header nav ul li {
-            margin-left: 20px;
-        }
-
-        header nav ul li a {
-            text-decoration: none;
-            color: #777;
-            font-size: 14px;
-        }
-        header nav ul li a:hover {
-            color: #333;
-        }
-
-        .checkout-area {
-            display: flex;
-        }
-
-        .checkout-form {
-            padding: 30px;
-            width: 60%;
-        }
-
-        .checkout-plan {
-            width: 40%;
-            background-color: #f0f8ff; /* Light blueish background */
-            padding: 30px;
-            color: #333;
-        }
-
-        .checkout-plan h2 {
-            margin-top: 0;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .checkout-plan .price {
-            font-size: 30px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        .checkout-plan .price span {
-            font-size: 16px;
-            font-weight: normal;
-        }
-
-        .checkout-plan ul {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 20px;
-        }
-
-        .checkout-plan ul li {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-        .checkout-plan ul li:before {
-            content: '✓'; /* Checkmark */
-            display: inline-block;
-            margin-right: 8px;
-            color: green; /* Or a similar green color */
-            font-weight: bold;
-        }
-
-
-        .checkout-plan .switch-plan {
-            font-size: 14px;
-            color: #007bff; /* Example blue color for links */
-            text-decoration: none;
-        }
-        .checkout-plan .switch-plan:hover {
-            text-decoration: underline;
-        }
-
-        .checkout-plan .testimonial {
-            background-color: white;
-            border: 1px solid #e0e0e0;
-            padding: 20px;
-            border-radius: 5px;
-            margin-top: 30px;
-        }
-        .checkout-plan .testimonial p {
-            font-style: italic;
-            margin-bottom: 15px;
-        }
-        .checkout-plan .testimonial .author {
-            display: flex;
-            align-items: center;
-        }
-        .checkout-plan .testimonial .author img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-        .checkout-plan .testimonial .author span {
-            font-weight: bold;
-        }
-
-
-        .form-section {
-            margin-bottom: 25px;
-        }
-
-        .form-section h2 {
-            font-size: 18px;
-            margin-top: 0;
-            margin-bottom: 20px;
-            font-weight: bold;
-            color: #555;
-        }
-        .form-section h2:before {
-            content: '①'; /* Numbering */
-            display: inline-block;
-            margin-right: 5px;
-            color: #aaa;
-        }
-        .form-section:nth-of-type(2) h2:before {
-            content: '②'; /* Numbering */
-        }
-
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #333;
-        }
-
-        .form-group input[type="text"],
-        .form-group input[type="email"] {
-            width: calc(50% - 10px); /* Adjust width for side-by-side fields */
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box; /* To include padding and border in width */
-        }
-        .form-group input[type="text"]:focus,
-        .form-group input[type="email"]:focus {
-            border-color: #007bff;
-            outline: none;
-            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-        }
-
-        .form-group.full-width input[type="email"] {
-            width: calc(100% - 22px); /* Full width for email field */
-        }
-
-
-        .name-fields .form-group input[type="text"] {
-             width: calc(50% - 15px); /* Adjust width for side-by-side fields in name section */
-        }
-
-
-        .payment-fields .form-group input[type="text"] {
-            width: calc(33.33% - 10px); /* Adjust width for side-by-side credit card fields */
-        }
-        .payment-fields .form-group.card-number input[type="text"] {
-             width: calc(100% - 22px); /* Full width for card number */
-        }
-
-
-        button.buy-button {
-            background-color: #28a745; /* Example green color */
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        button.buy-button:hover {
-            background-color: #218838;
-        }
-
-        .help-section {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #777;
-            display: flex;
-            align-items: center;
-        }
-        .help-section span {
-            margin-left: 5px;
-        }
-        .help-section a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .help-section a:hover {
-            text-decoration: underline;
-        }
-
-        footer {
-            padding: 20px;
-            background-color: #f7f7f7;
-            text-align: center;
-            color: #777;
-            font-size: 12px;
-            border-top: 1px solid #e0e0e0;
-        }
-        footer a {
-            color: #777;
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        .stripe-logo {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .stripe-logo img {
-            height: 20px; /* Adjust size as needed */
-            opacity: 0.7;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
+    <header>
+        <div class="header-inner">
             <div class="logo">
-                <img src="image.png" alt="Wp Pusher">
+                <img src="image.png" alt="WP Pusher Logo">
             </div>
             <nav>
                 <ul>
@@ -280,92 +21,88 @@
                     <li><a href="#">Account</a></li>
                 </ul>
             </nav>
-        </header>
+        </div>
+    </header>
 
-        <div class="checkout-area">
-            <div class="checkout-form">
-                <h2>Checkout</h2>
-
-                <form action="#" method="POST">
-                    <section class="form-section">
-                        <h2>Your Basic Information</h2>
-                        <div class="name-fields">
-                            <div class="form-group" style="float: left; width: 50%; padding-right: 10px;">
-                                <label for="firstName">First Name</label>
-                                <input type="text" id="firstName" name="firstName" value="Jane">
-                            </div>
-                            <div class="form-group" style="float: left; width: 50%; padding-left: 10px;">
-                                <label for="lastName">Last Name</label>
-                                <input type="text" id="lastName" name="lastName" value="Doe">
-                            </div>
-                            <div style="clear: both;"></div> </div>
-
-                        <div class="form-group full-width">
-                            <label for="email">E-mail</label>
-                            <input type="email" id="email" name="email" value="janedoe@example.com">
+    <div class="container">
+        <div class="checkout-form">
+            <h2 class="top">Checkout</h2>
+            <form>
+                <section class="form-section">
+                    <h2 id="info">Your Basic Information</h2>
+                    <div class="name-fields">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" value="Jane">
                         </div>
-                    </section>
-
-                    <section class="form-section">
-                        <h2>Your Payment Information</h2>
-                        <div class="payment-fields">
-                            <div class="form-group card-number">
-                                <label for="cardNumber">Credit Card</label>
-                                <input type="text" id="cardNumber" name="cardNumber" placeholder="Card Number">
-                            </div>
-                            <div class="form-group" style="float: left; width: 33.33%; padding-right: 10px;">
-                                <label for="mmYy">MM/YY</label>
-                                <input type="text" id="mmYy" name="mmYy" placeholder="MM/YY">
-                            </div>
-                            <div class="form-group" style="float: left; width: 33.33%; padding-left: 5px; padding-right: 5px;">
-                                <label for="cvc">CVC</label>
-                                <input type="text" id="cvc" name="cvc" placeholder="CVC">
-                            </div>
-                            <div style="clear: both;"></div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" value="Doe">
                         </div>
-                    </section>
-
-                    <button type="submit" class="buy-button">Buy WP Pusher</button>
-
-                    <div class="help-section">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAHElEQVR42mNgoALu7u7u7u7u7u4GgAAAQIAAAjS+vDwAAAAASUVORK5CYII=" width="16" height="16" alt="Help Icon">
-                        <span>Need any help? <a href="#">Don't hesitate to contact support!</a></span>
                     </div>
-                    <div class="stripe-logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo_%282016%29.svg/2560px-Stripe_Logo_%282016%29.svg.png" alt="Stripe Logo">
+                    <div class="form-group full-width">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" value="janedoe@example.com">
                     </div>
+                </section>
 
-                </form>
-            </div>
-
-            <div class="checkout-plan">
-                <h2>Freelancer</h2>
-                <p class="price">$99 <span>/year</span></p>
-                <p style="font-size: 14px; color: #555; margin-bottom: 20px;">Automatically renews <br>after 1 year</p>
-
-                <ul>
-                    <li>Use on 5 client sites</li>
-                    <li>Private repositories</li>
-                    <li>Email support</li>
-                </ul>
-
-                <p style="font-size: 14px;">Need 20 client sites?</p>
-                <a href="#" class="switch-plan">Switch to the Agency plan</a>
-
-                <div class="testimonial">
-                    <p>"FTP is horrible to deal with. WP Pusher solves that issue, and the customer support is awesome!"</p>
-                    <div class="author">
-                        <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Kirk Beard">
-                        <span>Kirk Beard</span>
+                <section class="form-section">
+                    <h2 id="pay">Your Payment Information</h2>
+                    <div class="payment-fields">
+                        <div class="form-group card-number">
+                            <label for="cardNumber">Credit Card</label>
+                            <input type="text" id="cardNumber" name="cardNumber" placeholder="Card Number">
+                        </div>
+                        <div class="form-group">
+                            <label for="mmYy">MM/YY</label>
+                            <input type="text" id="mmYy" name="mmYy" placeholder="MM/YY">
+                        </div>
+                        <div class="form-group">
+                            <label for="cvc">CVC</label>
+                            <input type="text" id="cvc" name="cvc" placeholder="CVC">
+                        </div>
                     </div>
+                </section>
+
+                <button type="submit" class="buy-button">Buy WP Pusher</button>
+
+                <div class="help-section">
+                    <img src="help.png" width="16" height="16" alt="Help Icon">
+                    <span>Need any help? <a href="#">Don't hesitate to contact support!</a></span>
+                </div>
+                <div class="stripe-logo">
+                    <img src="stripe.png" alt="Stripe Logo">
+                </div>
+            </form>
+        </div>
+
+        <div class="checkout-plan">
+            <h2>Freelancer</h2>
+            <p class="price"> <span id="dollar">$</span> 99 <span>/ year</span></p>
+            <p class="renew"> Automatically renews <br>after 1 year</p>
+
+            <ul>
+                <li>Use on 5 client sites</li>
+                <li>Private repositories</li>
+                <li>Email support</li>
+            </ul>
+
+            <p class="client">Need 20 client sites?</p>
+            <a href="#" class="switch">Switch to the Agency plan</a>
+
+            <div class="testimonial">
+                <p>"FTP is horrible to deal with. <br>
+                    <span> WP Pusher </span>solves that issue, and the customer support is awesome!"</p>
+                <div class="author">
+                    <img src="kirkbeard.png" alt="Kirk Beard">
+                    <span>Kirk Beard</span>
                 </div>
             </div>
         </div>
 
-        <footer>
-            &copy;2018 WP Pusher IVS &nbsp;&nbsp; <a href="#">Terms of Service</a>
-        </footer>
     </div>
+    <footer>
+        &copy;2018 WP Pusher IVS &nbsp;&nbsp; <a href="#">Terms of Service</a>
+    </footer>
 </body>
 </html>
-```
